@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="NORD Café Especial — uma experiência de café premium, acolhedora e contemporânea."
+  />
+  <title>NORD — Café Especial</title>
+
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a class="brand" href="#inicio" aria-label="NORD - início">
+        <span class="brand-mark">N</span>
+        <span>NORD</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="main-menu"
+      >
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="main-menu" class="main-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#torras">Torras</a>
+        <a href="#origem">Experiência</a>
+        <a class="nav-cta" href="#contato">Quero conhecer</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">CAFÉ ESPECIAL • PEQUENOS LOTES</p>
+
+          <h1>
+            Café especial,
+            <span>sem complicação.</span>
+          </h1>
+
+          <p class="hero-text">
+            Uma experiência feita para quem aprecia aroma, cuidado e tempo.
+            Escolha sua torra e descubra um novo ritual para todos os dias.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#torras">Conheça nossas torras</a>
+            <a class="text-link" href="#origem">Descubra a NORD →</a>
+          </div>
+
+          <ul class="hero-highlights" aria-label="Destaques da marca">
+            <li>Torra artesanal</li>
+            <li>Pequenos lotes</li>
+            <li>Experiência premium</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <div class="image-frame">
+            <img
+              src="assets/images/cafe-nord.svg"
+              alt="Xícara de café quente ao lado de uma embalagem NORD"
+            />
+          </div>
+          <div class="floating-note">
+            <span class="note-number">03</span>
+            <span>perfis de torra</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="torras">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">ESCOLHA SEU PERFIL</p>
+          <h2>Três torras. Três momentos.</h2>
+          <p>
+            Do perfil mais delicado ao mais intenso, cada torra oferece uma
+            experiência diferente sem perder a identidade NORD.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="coffee-card">
+            <span class="card-number">01</span>
+            <h3>Torra Clara</h3>
+            <p>Delicada, aromática e leve. Para quem gosta de perceber cada nuance.</p>
+            <span class="card-tag">Suave</span>
+          </article>
+
+          <article class="coffee-card featured">
+            <span class="card-number">02</span>
+            <h3>Torra Média</h3>
+            <p>Equilibrada e versátil. Uma escolha fácil para diferentes métodos.</p>
+            <span class="card-tag">Equilíbrio</span>
+          </article>
+
+          <article class="coffee-card">
+            <span class="card-number">03</span>
+            <h3>Torra Intensa</h3>
+            <p>Encorpada e marcante. Para quem prefere presença e final prolongado.</p>
+            <span class="card-tag">Intensidade</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="origem">
+      <div class="container story-grid">
+        <div>
+          <p class="eyebrow">A EXPERIÊNCIA NORD</p>
+          <h2>Mais do que café. Um pequeno ritual.</h2>
+        </div>
+
+        <div class="story-copy">
+          <p>
+            A NORD foi pensada para transformar uma pausa comum em um momento
+            de atenção. Café bem apresentado, torra cuidadosa e uma experiência
+            visual simples, quente e contemporânea.
+          </p>
+
+          <div class="story-points">
+            <div>
+              <strong>01</strong>
+              <span>Escolha a torra</span>
+            </div>
+            <div>
+              <strong>02</strong>
+              <span>Prepare do seu jeito</span>
+            </div>
+            <div>
+              <strong>03</strong>
+              <span>Aproveite o momento</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contato">
+      <div class="container contact-card">
+        <div>
+          <p class="eyebrow eyebrow-light">PRONTO PARA DESCOBRIR?</p>
+          <h2>Encontre a torra que combina com o seu momento.</h2>
+        </div>
+        <a class="button button-light" href="mailto:contato@nord.exemplo">
+          Falar com a NORD
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand brand-footer" href="#inicio">
+          <span class="brand-mark">N</span>
+          <span>NORD</span>
+        </a>
+        <p>Café especial para experiências simples e bem cuidadas.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#inicio">Início</a>
+        <a href="#torras">Torras</a>
+        <a href="#origem">Experiência</a>
+      </div>
+
+      <p class="copyright">
+        © <span id="current-year"></span> NORD Café Especial.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
