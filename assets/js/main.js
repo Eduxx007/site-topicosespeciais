@@ -166,3 +166,124 @@ if (quizForm) {
   }
 }
 
+// Interatividade do Formulário de Pedidos (produtos.html)
+const orderForm = document.querySelector("#order-form");
+const orderSuccess = document.querySelector("#order-success");
+const torraSelect = document.querySelector("#order-torra");
+const orderSection = document.querySelector("#pedido");
+const cardChoiceButtons = document.querySelectorAll(".btn-escolher-torra");
+const btnNovoPedido = document.querySelector("#btn-novo-pedido");
+
+// 1. Ação dos 3 botões dos cards com seleção automática da torra
+if (cardChoiceButtons.length > 0 && torraSelect) {
+  cardChoiceButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const chosenTorra = button.getAttribute("data-torra");
+      if (chosenTorra) {
+        torraSelect.value = chosenTorra;
+        const group = torraSelect.closest(".form-group");
+        if (group) {
+          group.classList.remove("has-error");
+          torraSelect.classList.remove("is-invalid");
+        }
+        torraSelect.classList.remove("highlight-field");
+        void torraSelect.offsetWidth;
+        torraSelect.classList.add("highlight-field");
+        setTimeout(() => torraSelect.classList.remove("highlight-field"), 1600);
+      }
+      if (orderSection) {
+        e.preventDefault();
+        orderSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        const nameField = document.querySelector("#order-nome");
+        if (nameField) {
+          setTimeout(() => nameField.focus({ preventScroll: true }), 450);
+        }
+      }
+    });
+  });
+}
+
+// 2. Validação obrigatória e envio sem reload
+if (orderForm) {
+  orderForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const nomeInput = orderForm.querySelector("#order-nome");
+    const whatsappInput = orderForm.querySelector("#order-whatsapp");
+    const emailInput = orderForm.querySelector("#order-email");
+    const torraInput = orderForm.querySelector("#order-torra");
+    const quantidadeInput = orderForm.querySelector("#order-quantidade");
+    const mensagemInput = orderForm.querySelector("#order-mensagem");
+
+    let isValid = true;
+
+    function validateField(input, condition, errorMsg) {
+      const group = input.closest(".form-group");
+      const errorSpan = group ? group.querySelector(".form-error-msg") : null;
+      if (!condition) {
+        isValid = false;
+        input.classList.add("is-invalid");
+        if (group) group.classList.add("has-error");
+        if (errorSpan && errorMsg) errorSpan.textContent = errorMsg;
+      } else {
+        input.classList.remove("is-invalid");
+        if (group) group.classList.remove("has-error");
+      }
+    }
+
+    // Validações com trim para não aceitar espaços vazios
+    validateField(nomeInput, nomeInput.value.trim().length > 0, "Por favor, informe seu nome.");
+    validateField(whatsappInput, whatsappInput.value.trim().length >= 8, "Por favor, informe seu WhatsApp com DDD.");
+
+    const emailVal = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    validateField(emailInput, emailVal.length > 0 && emailRegex.test(emailVal), "Por favor, informe um e-mail válido.");
+
+    validateField(torraInput, torraInput.value.trim().length > 0, "Por favor, selecione uma opção de torra.");
+
+    const qtdVal = parseInt(quantidadeInput.value, 10);
+    validateField(quantidadeInput, !isNaN(qtdVal) && qtdVal > 0, "Por favor, informe uma quantidade válida (mínimo 1).");
+
+    validateField(mensagemInput, mensagemInput.value.trim().length > 0, "Por favor, escreva uma mensagem.");
+
+    if (!isValid) {
+      const firstInvalid = orderForm.querySelector(".is-invalid");
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+      return;
+    }
+
+    // Formulário preenchido corretamente: exibe sucesso sem recarregar a página
+    orderForm.hidden = true;
+    if (orderSuccess) {
+      orderSuccess.hidden = false;
+      orderSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  });
+
+  // Limpa o estado de erro dinamicamente ao digitar/mudar campo
+  orderForm.querySelectorAll("input, select, textarea").forEach((field) => {
+    field.addEventListener("input", () => {
+      field.classList.remove("is-invalid");
+      const group = field.closest(".form-group");
+      if (group) group.classList.remove("has-error");
+    });
+    field.addEventListener("change", () => {
+      field.classList.remove("is-invalid");
+      const group = field.closest(".form-group");
+      if (group) group.classList.remove("has-error");
+    });
+  });
+
+  if (btnNovoPedido) {
+    btnNovoPedido.addEventListener("click", () => {
+      orderForm.reset();
+      orderForm.hidden = false;
+      if (orderSuccess) orderSuccess.hidden = true;
+      orderForm.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+}
+
+

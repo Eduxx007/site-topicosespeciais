@@ -62,7 +62,7 @@
             <h3>Torra Clara</h3>
             <p>Delicada, aromática e leve. Para quem gosta de perceber cada nuance.</p>
             <span class="card-tag">Suave</span>
-            <a class="button button-primary card-button" href="index.html#contato">Escolha esta torra</a>
+            <a class="button button-primary card-button btn-escolher-torra" href="#pedido" data-torra="clara">Escolha esta torra</a>
           </article>
 
           <article class="coffee-card featured" id="torra-media">
@@ -70,7 +70,7 @@
             <h3>Torra Média</h3>
             <p>Equilibrada e versátil. Uma escolha fácil para diferentes métodos.</p>
             <span class="card-tag">Equilíbrio</span>
-            <a class="button button-light card-button" href="index.html#contato">Escolha esta torra</a>
+            <a class="button button-light card-button btn-escolher-torra" href="#pedido" data-torra="media">Escolha esta torra</a>
           </article>
 
           <article class="coffee-card" id="torra-intensa">
@@ -78,7 +78,7 @@
             <h3>Torra Intensa</h3>
             <p>Encorpada e marcante. Para quem prefere presença e final prolongado.</p>
             <span class="card-tag">Intensidade</span>
-            <a class="button button-primary card-button" href="index.html#contato">Escolha esta torra</a>
+            <a class="button button-primary card-button btn-escolher-torra" href="#pedido" data-torra="intensa">Escolha esta torra</a>
           </article>
         </div>
       </div>
@@ -194,15 +194,136 @@
       </div>
     </section>
 
-    <section class="contact-section">
-      <div class="container contact-card">
-        <div>
-          <p class="eyebrow eyebrow-light">PRONTO PARA DESCOBRIR?</p>
-          <h2>Encontre a torra que combina com o seu momento.</h2>
+    <!-- Seção: Formulário de Pedidos -->
+    <section class="section section-order" id="pedido">
+      <div class="container">
+        <div class="order-wrapper">
+          <div class="section-heading" style="margin-bottom: 24px;">
+            <p class="eyebrow">FAÇA SUA SOLICITAÇÃO</p>
+            <h2>Peça o seu café NORD</h2>
+            <p>
+              Preencha o formulário abaixo para receber seu café especial torrado artesanalmente em pequenos lotes.
+            </p>
+          </div>
+
+          <form id="order-form" class="order-form" novalidate>
+            <div class="form-grid">
+              <!-- Nome -->
+              <div class="form-group">
+                <label for="order-nome" class="form-label">
+                  Nome completo <span class="required-mark">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="order-nome"
+                  name="nome"
+                  class="form-control"
+                  placeholder="Ex: Maria Silva"
+                  required
+                />
+                <span class="form-error-msg">Por favor, informe seu nome.</span>
+              </div>
+
+              <!-- WhatsApp -->
+              <div class="form-group">
+                <label for="order-whatsapp" class="form-label">
+                  WhatsApp com DDD <span class="required-mark">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="order-whatsapp"
+                  name="whatsapp"
+                  class="form-control"
+                  placeholder="Ex: (83) 98888-7777"
+                  required
+                />
+                <span class="form-error-msg">Por favor, informe seu WhatsApp com DDD.</span>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label for="order-email" class="form-label">
+                  E-mail <span class="required-mark">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="order-email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Ex: maria@email.com"
+                  required
+                />
+                <span class="form-error-msg">Por favor, informe um e-mail válido.</span>
+              </div>
+
+              <!-- Torra -->
+              <div class="form-group">
+                <label for="order-torra" class="form-label">
+                  Perfil de torra <span class="required-mark">*</span>
+                </label>
+                <select id="order-torra" name="torra" class="form-control" required>
+                  <option value="">Selecione sua torra</option>
+                  <option value="clara">Torra Clara (Delicada e Floral)</option>
+                  <option value="media">Torra Média (Equilibrada e Versátil)</option>
+                  <option value="intensa">Torra Intensa (Encorpada e Marcante)</option>
+                </select>
+                <span class="form-error-msg">Por favor, selecione uma torra.</span>
+              </div>
+
+              <!-- Quantidade -->
+              <div class="form-group full-width">
+                <label for="order-quantidade" class="form-label">
+                  Quantidade de pacotes (250g) <span class="required-mark">*</span>
+                </label>
+                <input
+                  type="number"
+                  id="order-quantidade"
+                  name="quantidade"
+                  min="1"
+                  max="100"
+                  class="form-control"
+                  placeholder="Ex: 2"
+                  required
+                />
+                <span class="form-error-msg">Por favor, informe a quantidade desejada (mínimo 1).</span>
+              </div>
+
+              <!-- Mensagem -->
+              <div class="form-group full-width">
+                <label for="order-mensagem" class="form-label">
+                  Mensagem ou observações <span class="required-mark">*</span>
+                </label>
+                <textarea
+                  id="order-mensagem"
+                  name="mensagem"
+                  class="form-control"
+                  rows="4"
+                  placeholder="Informe sua preferência de moagem (grãos inteiros ou moído para o seu método), endereço para entrega ou dúvidas..."
+                  required
+                ></textarea>
+                <span class="form-error-msg">Por favor, escreva sua mensagem ou observação.</span>
+              </div>
+            </div>
+
+            <div class="order-actions">
+              <button type="submit" class="button button-primary order-submit-btn">
+                Enviar solicitação de café
+              </button>
+            </div>
+          </form>
+
+          <!-- Card de Confirmação e Sucesso -->
+          <div id="order-success" class="order-success-card" hidden aria-live="polite">
+            <div class="success-badge">✓</div>
+            <h3 id="order-success-message">Solicitação recebida! A NORD entrará em contato.</h3>
+            <p>
+              Recebemos seu pedido com carinho. Nossa equipe entrará em contato em breve via WhatsApp ou e-mail para confirmar a disponibilidade do lote e combinar a entrega.
+            </p>
+            <button type="button" id="btn-novo-pedido" class="button button-light">
+              Fazer novo pedido
+            </button>
+          </div>
         </div>
-        <a class="button button-light" href="mailto:contato@nord.exemplo">
-          Falar com a NORD
-        </a>
       </div>
     </section>
   </main>
