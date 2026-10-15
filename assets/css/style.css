@@ -334,6 +334,8 @@ a {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: #fff;
+  scroll-margin-top: 100px;
+  transition: transform 300ms ease, box-shadow 300ms ease;
 }
 
 .coffee-card.featured {
@@ -580,3 +582,211 @@ a {
     grid-column: auto;
   }
 }
+
+/* Quiz — Qual torra combina com você? -------------------- */
+
+.quiz-container {
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.quiz-form {
+  margin-top: 36px;
+}
+
+.quiz-step {
+  margin-bottom: 42px;
+}
+
+.quiz-step-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.quiz-question {
+  margin: 0 0 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.quiz-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.quiz-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.quiz-option-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  background: #fff;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.quiz-option:hover .quiz-option-card {
+  transform: translateY(-2px);
+  border-color: rgba(141, 79, 44, 0.4);
+  box-shadow: 0 12px 30px rgba(52, 30, 18, 0.08);
+}
+
+.quiz-option.is-selected .quiz-option-card,
+.quiz-option input:checked + .quiz-option-card {
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 14px 34px rgba(141, 79, 44, 0.15);
+}
+
+.option-tag {
+  align-self: flex-start;
+  margin-bottom: 10px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.option-title {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.28rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.option-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.quiz-actions .button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Resultado do Quiz */
+.quiz-result {
+  margin-top: 48px;
+}
+
+.result-card {
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  background: var(--dark);
+  color: #fff;
+  box-shadow: var(--shadow);
+  animation: resultFadeIn 400ms ease-out forwards;
+}
+
+@keyframes resultFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-title {
+  margin: 10px 0 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  color: #fff;
+}
+
+.result-description {
+  max-width: 680px;
+  margin: 0 0 30px;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: #d7c8bd;
+}
+
+.result-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.button-secondary {
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+/* Destaque do Card correspondente */
+@keyframes cardHighlight {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 rgba(141, 79, 44, 0.5);
+  }
+  25% {
+    transform: translateY(-8px);
+    box-shadow: 0 0 0 5px var(--accent), 0 20px 45px rgba(141, 79, 44, 0.35);
+  }
+  75% {
+    transform: translateY(-8px);
+    box-shadow: 0 0 0 5px var(--accent), 0 20px 45px rgba(141, 79, 44, 0.35);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+.coffee-card.highlight-card {
+  animation: cardHighlight 2.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (max-width: 800px) {
+  .quiz-options {
+    grid-template-columns: 1fr;
+  }
+
+  .result-card {
+    padding: 32px 24px;
+  }
+}
+

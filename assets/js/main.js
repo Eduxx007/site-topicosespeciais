@@ -22,3 +22,147 @@ if (menuButton && menu) {
     });
   });
 }
+
+// Interatividade do Quiz de Torras (produtos.html)
+const quizForm = document.querySelector("#coffee-quiz");
+if (quizForm) {
+  const resultContainer = document.querySelector("#quiz-result");
+  const resultTitle = document.querySelector("#result-title");
+  const resultDescription = document.querySelector("#result-description");
+  const btnVerTorra = document.querySelector("#btn-ver-torra");
+  const btnSubmit = document.querySelector("#btn-quiz-result");
+  const btnRefazer = document.querySelector("#btn-refazer-quiz");
+
+  const quizRecommendations = {
+    "suavidade-suavidade": {
+      target: "torra-clara",
+      title: "Torra Clara",
+      description: "Você valoriza a suavidade e a riqueza de aromas delicados. A Torra Clara preserva os óleos essenciais, a acidez viva e as notas florais dos nossos grãos, perfeita para métodos filtrados e degustação com atenção a cada nuance."
+    },
+    "suavidade-equilibrio": {
+      target: "torra-clara",
+      title: "Torra Clara",
+      description: "Você aprecia a suavidade aromática combinada com a facilidade do dia a dia. A Torra Clara entrega uma xícara límpida, aromática e muito agradável, destacando notas frutadas e florais."
+    },
+    "suavidade-intensidade": {
+      target: "torra-media",
+      title: "Torra Média",
+      description: "Você deseja um ponto de encontro entre notas delicadas e presença marcante. A Torra Média é o equilíbrio ideal que entrega corpo redondo sem perder nuances aromáticas."
+    },
+    "equilibrio-suavidade": {
+      target: "torra-media",
+      title: "Torra Média",
+      description: "Você valoriza harmonia com um toque suave. A Torra Média entrega uma bebida aveludada e equilibrada, destacando a doçura natural do grão em qualquer método de preparo."
+    },
+    "equilibrio-equilibrio": {
+      target: "torra-media",
+      title: "Torra Média",
+      description: "Você busca harmonia e versatilidade em qualquer momento. A Torra Média reúne doçura natural com corpo aveludado, sendo a escolha perfeita tanto para a rotina diária quanto para pausas especiais."
+    },
+    "equilibrio-intensidade": {
+      target: "torra-media",
+      title: "Torra Média",
+      description: "Você gosta de equilíbrio com um pouco mais de presença. A Torra Média oferece corpo sem amargor excessivo, funcionando perfeitamente puro ou com leite."
+    },
+    "intensidade-suavidade": {
+      target: "torra-media",
+      title: "Torra Média",
+      description: "A combinação entre busca por intensidade e preparo cuidadoso encontra na Torra Média o balanço ideal: sabor presente com final limpo e equilibrado."
+    },
+    "intensidade-equilibrio": {
+      target: "torra-intensa",
+      title: "Torra Intensa",
+      description: "Você gosta de café com presença marcante e notas tostadas envolventes. A Torra Intensa traz corpo consistente e presença marcante, mantendo ótima versatilidade para o dia a dia."
+    },
+    "intensidade-intensidade": {
+      target: "torra-intensa",
+      title: "Torra Intensa",
+      description: "Você procura máxima presença, corpo denso e energia revigorante. A Torra Intensa desenvolve notas profundas de cacau e caramelo escuro, final prolongado e ótima extração para espresso ou bebidas com leite."
+    }
+  };
+
+  function displayRecommendation(perfil, momento) {
+    const key = `${perfil}-${momento}`;
+    const match = quizRecommendations[key] || quizRecommendations["equilibrio-equilibrio"];
+
+    if (resultTitle) resultTitle.textContent = match.title;
+    if (resultDescription) resultDescription.textContent = match.description;
+    if (btnVerTorra) {
+      btnVerTorra.href = `#${match.target}`;
+      btnVerTorra.setAttribute("data-target", match.target);
+    }
+
+    if (resultContainer) {
+      resultContainer.hidden = false;
+      resultContainer.classList.add("is-visible");
+      resultContainer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+
+  function handleSelectionChange() {
+    const selectedPerfil = quizForm.querySelector('input[name="perfil"]:checked');
+    const selectedMomento = quizForm.querySelector('input[name="momento"]:checked');
+
+    quizForm.querySelectorAll(".quiz-option").forEach((label) => {
+      const radio = label.querySelector("input");
+      if (radio && radio.checked) {
+        label.classList.add("is-selected");
+      } else {
+        label.classList.remove("is-selected");
+      }
+    });
+
+    if (btnSubmit) {
+      btnSubmit.disabled = !(selectedPerfil || selectedMomento);
+    }
+
+    if (selectedPerfil && selectedMomento) {
+      displayRecommendation(selectedPerfil.value, selectedMomento.value);
+    }
+  }
+
+  quizForm.addEventListener("change", handleSelectionChange);
+
+  if (btnSubmit) {
+    btnSubmit.addEventListener("click", () => {
+      const selectedPerfil = quizForm.querySelector('input[name="perfil"]:checked');
+      const selectedMomento = quizForm.querySelector('input[name="momento"]:checked');
+      const p = selectedPerfil ? selectedPerfil.value : "equilibrio";
+      const m = selectedMomento ? selectedMomento.value : "equilibrio";
+      displayRecommendation(p, m);
+    });
+  }
+
+  if (btnVerTorra) {
+    btnVerTorra.addEventListener("click", (e) => {
+      const targetId = btnVerTorra.getAttribute("data-target") || btnVerTorra.getAttribute("href")?.replace("#", "");
+      if (targetId) {
+        const targetCard = document.getElementById(targetId);
+        if (targetCard) {
+          e.preventDefault();
+          targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+          targetCard.classList.remove("highlight-card");
+          void targetCard.offsetWidth; // Força reflow para reiniciar animação
+          targetCard.classList.add("highlight-card");
+          setTimeout(() => {
+            targetCard.classList.remove("highlight-card");
+          }, 2500);
+        }
+      }
+    });
+  }
+
+  if (btnRefazer) {
+    btnRefazer.addEventListener("click", () => {
+      quizForm.reset();
+      quizForm.querySelectorAll(".quiz-option").forEach((opt) => opt.classList.remove("is-selected"));
+      if (resultContainer) {
+        resultContainer.hidden = true;
+        resultContainer.classList.remove("is-visible");
+      }
+      if (btnSubmit) btnSubmit.disabled = true;
+      quizForm.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+}
+

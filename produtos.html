@@ -57,7 +57,7 @@
         </div>
 
         <div class="cards-grid">
-          <article class="coffee-card">
+          <article class="coffee-card" id="torra-clara">
             <span class="card-number">01</span>
             <h3>Torra Clara</h3>
             <p>Delicada, aromática e leve. Para quem gosta de perceber cada nuance.</p>
@@ -65,7 +65,7 @@
             <a class="button button-primary card-button" href="index.html#contato">Escolha esta torra</a>
           </article>
 
-          <article class="coffee-card featured">
+          <article class="coffee-card featured" id="torra-media">
             <span class="card-number">02</span>
             <h3>Torra Média</h3>
             <p>Equilibrada e versátil. Uma escolha fácil para diferentes métodos.</p>
@@ -73,13 +73,123 @@
             <a class="button button-light card-button" href="index.html#contato">Escolha esta torra</a>
           </article>
 
-          <article class="coffee-card">
+          <article class="coffee-card" id="torra-intensa">
             <span class="card-number">03</span>
             <h3>Torra Intensa</h3>
             <p>Encorpada e marcante. Para quem prefere presença e final prolongado.</p>
             <span class="card-tag">Intensidade</span>
             <a class="button button-primary card-button" href="index.html#contato">Escolha esta torra</a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção: Qual torra combina com você? -->
+    <section class="section" id="quiz-section">
+      <div class="container">
+        <div class="quiz-container">
+          <div class="section-heading">
+            <p class="eyebrow">DESCUBRA SEU PERFIL</p>
+            <h2>Qual torra combina com você?</h2>
+            <p>
+              Escolha suas preferências de intensidade, suavidade e equilíbrio para descobrir a torra perfeita para o seu ritual.
+            </p>
+          </div>
+
+          <form id="coffee-quiz" class="quiz-form" onsubmit="return false;">
+            <!-- Passo 1 -->
+            <div class="quiz-step">
+              <span class="quiz-step-badge">Passo 1</span>
+              <h3 class="quiz-question">O que você mais valoriza na sua xícara?</h3>
+              <div class="quiz-options" role="radiogroup" aria-label="Preferência de perfil sensorial">
+                <label class="quiz-option">
+                  <input type="radio" name="perfil" value="suavidade" />
+                  <span class="quiz-option-card">
+                    <span class="option-tag">Suavidade</span>
+                    <strong class="option-title">Notas florais e leveza</strong>
+                    <span class="option-desc">Uma xícara delicada, aromática e com acidez viva para perceber nuances.</span>
+                  </span>
+                </label>
+
+                <label class="quiz-option">
+                  <input type="radio" name="perfil" value="equilibrio" />
+                  <span class="quiz-option-card">
+                    <span class="option-tag">Equilíbrio</span>
+                    <strong class="option-title">Harmonia e versatilidade</strong>
+                    <span class="option-desc">Doçura natural, corpo aveludado e fácil de apreciar em qualquer hora.</span>
+                  </span>
+                </label>
+
+                <label class="quiz-option">
+                  <input type="radio" name="perfil" value="intensidade" />
+                  <span class="quiz-option-card">
+                    <span class="option-tag">Intensidade</span>
+                    <strong class="option-title">Presença e corpo forte</strong>
+                    <span class="option-desc">Sabor encorpado, final prolongado e notas tostadas marcantes.</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Passo 2 -->
+            <div class="quiz-step">
+              <span class="quiz-step-badge">Passo 2</span>
+              <h3 class="quiz-question">Qual é o seu método ou momento preferido?</h3>
+              <div class="quiz-options" role="radiogroup" aria-label="Momento e método de preparo">
+                <label class="quiz-option">
+                  <input type="radio" name="momento" value="suavidade" />
+                  <span class="quiz-option-card">
+                    <span class="option-tag">Suavidade</span>
+                    <strong class="option-title">Métodos filtrados ou prensa</strong>
+                    <span class="option-desc">Degustar com calma no coador, V60 ou prensa francesa.</span>
+                  </span>
+                </label>
+
+                <label class="quiz-option">
+                  <input type="radio" name="momento" value="equilibrio" />
+                  <span class="quiz-option-card">
+                    <span class="option-tag">Equilíbrio</span>
+                    <strong class="option-title">Cafeteira ou filtro do dia a dia</strong>
+                    <span class="option-desc">Praticidade diária, excelente tanto puro quanto acompanhado.</span>
+                  </span>
+                </label>
+
+                <label class="quiz-option">
+                  <input type="radio" name="momento" value="intensidade" />
+                  <span class="quiz-option-card">
+                    <span class="option-tag">Intensidade</span>
+                    <strong class="option-title">Espresso ou com leite</strong>
+                    <span class="option-desc">Dose concentrada para despertar ou bebida encorpada com leite.</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="quiz-actions">
+              <button type="button" id="btn-quiz-result" class="button button-primary" disabled>
+                Descobrir minha torra
+              </button>
+            </div>
+          </form>
+
+          <!-- Resultado sem recarregar a página -->
+          <div id="quiz-result" class="quiz-result" hidden aria-live="polite">
+            <div class="result-card">
+              <p class="eyebrow eyebrow-light">SUA TORRA RECOMENDADA</p>
+              <h3 id="result-title" class="result-title">Torra Clara</h3>
+              <p id="result-description" class="result-description">
+                Justificativa.
+              </p>
+              <div class="result-actions">
+                <a id="btn-ver-torra" class="button button-light" href="#torra-clara">
+                  Ver esta torra
+                </a>
+                <button type="button" id="btn-refazer-quiz" class="button button-secondary">
+                  Refazer teste
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
